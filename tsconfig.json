@@ -1,0 +1,12 @@
+{
+  "extends": "../../../modera-app/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "../../../modera-app",
+    "paths": {
+      "@modera/contracts": ["core/packages/contracts/src/index.ts"],
+      "@modera/plugin-sdk": ["core/packages/plugin-sdk/src/index.ts"],
+      "@modera/plugin-sdk/react": ["core/packages/plugin-sdk/src/react.tsx"]
+    }
+  },
+  "include": ["src", "ui"]
+}

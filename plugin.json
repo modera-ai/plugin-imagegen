@@ -1,0 +1,141 @@
+{
+  "apiVersion": 1,
+  "id": "modera.imagegen",
+  "name": "Image generation",
+  "author": "Modera",
+  "icon": "camera",
+  "locales": {
+    "zh-CN": {
+      "name": "图片生成",
+      "description": "独立选择 OpenAI API 或 Codex CLI，在当前对话中生成和编辑图片。"
+    }
+  },
+  "version": "0.1.0",
+  "description": "Generate and edit images independently of the chat model using OpenAI API or Codex CLI.",
+  "main": "dist/index.cjs",
+  "permissions": [
+    "network.fetch",
+    "workspace.read",
+    "workspace.write",
+    "storage.write"
+  ],
+  "extensions": [
+    "settings"
+  ],
+  "configScope": "global",
+  "config": {
+    "model": {
+      "type": "string",
+      "default": "gpt-image-1.5",
+      "title": "Image model",
+      "maxLength": 100
+    },
+    "provider": {
+      "type": "string",
+      "default": "openai",
+      "title": "Image provider"
+    },
+    "connectionId": {
+      "type": "string",
+      "default": "",
+      "title": "Codex connection",
+      "maxLength": 100
+    },
+    "cliModel": {
+      "type": "string",
+      "default": "",
+      "title": "Codex model",
+      "maxLength": 100
+    }
+  },
+  "settings": {
+    "title": "Image generation",
+    "group": "connections",
+    "frontend": "settings",
+    "locales": {
+      "zh-CN": {
+        "title": "图片生成"
+      }
+    }
+  },
+  "frontends": {
+    "settings": {
+      "root": "dist/ui",
+      "entry": "settings.html"
+    }
+  },
+  "agentGuidance": "For image creation or editing, read skillId modera.imagegen and use image_generate. The configured image provider is independent of the chat model (OpenAI API or Codex CLI). Never automatically retry. References must be authorized project-relative images or attachment:<id> from this conversation.",
+  "skills": [
+    {
+      "id": "modera.imagegen",
+      "name": "Image generation",
+      "description": "Create or edit images with OpenAI, preserving requested reference content."
+    }
+  ],
+  "tools": [
+    {
+      "id": "image_generate",
+      "title": "Generate image",
+      "description": "Generate one image, or edit authorized project images. Images are saved under generated-images and returned inline. Paid operation: no automatic retries. Configure the independent image model and credential in settings.",
+      "requiredPermissions": [
+        "network.fetch",
+        "workspace.read",
+        "workspace.write"
+      ],
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "prompt"
+        ],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32000
+          },
+          "references": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2000
+            }
+          },
+          "size": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "1024x1024",
+              "1536x1024",
+              "1024x1536"
+            ]
+          },
+          "quality": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        }
+      },
+      "presentation": {
+        "icon": "camera",
+        "tone": "violet",
+        "kind": "file",
+        "targets": [
+          "prompt"
+        ]
+      },
+      "locales": {
+        "zh-CN": {
+          "title": "生成图片"
+        }
+      }
+    }
+  ]
+}

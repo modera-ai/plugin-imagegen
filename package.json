@@ -1,0 +1,22 @@
+{
+  "name": "@modera-plugin/imagegen",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "plugin.json",
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "modera-plugin-build ."
+  },
+  "devDependencies": {
+    "@modera/plugin-build": "0.1.0",
+    "@modera/plugin-sdk": "0.1.0"
+  },
+  "dependencies": {
+    "@modera/ui": "file:../../../modera-ui",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}
