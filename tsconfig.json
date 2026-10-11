@@ -1,12 +1,15 @@
 {
-  "extends": "../../../modera-app/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "../../../modera-app",
-    "paths": {
-      "@modera/contracts": ["core/packages/contracts/src/index.ts"],
-      "@modera/plugin-sdk": ["core/packages/plugin-sdk/src/index.ts"],
-      "@modera/plugin-sdk/react": ["core/packages/plugin-sdk/src/react.tsx"]
-    }
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"]
   },
   "include": ["src", "ui"]
 }
