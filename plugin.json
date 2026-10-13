@@ -11,7 +11,7 @@
       "description": "独立选择 OpenAI API 或 Codex CLI，在当前对话中生成和编辑图片。"
     }
   },
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Generate and edit images independently of the chat model using OpenAI API or Codex CLI.",
   "main": "dist/index.cjs",
   "permissions": [
